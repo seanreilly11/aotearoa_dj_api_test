@@ -5,6 +5,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(express.static("./index.html"));
 
 const videos = require("./routes/videos");
 const users = require("./routes/users");

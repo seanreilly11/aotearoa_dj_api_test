@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middlewares/multer");
 const {
     getVideos,
+    addVideo,
     getVideosUnrestricted,
     getVideoByID,
-    addVideo,
     getVideosByCourse,
     viewVideo,
     removeVideo,
@@ -19,8 +20,8 @@ router.route("/:id").get(getVideoByID).patch(updateVideo);
 
 router.route("/courses/:id").get(getVideosByCourse);
 
-router.route("/view").patch(viewVideo);
+router.route("/view/:id").patch(viewVideo);
 
-router.route("/remove").patch(removeVideo);
+router.route("/remove/:id").patch(removeVideo);
 
 module.exports = router;

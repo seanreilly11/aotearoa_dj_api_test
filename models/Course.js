@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"); // since we are using mongoose we have to require it
+const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
     title: {
@@ -6,10 +6,16 @@ const courseSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    description: String,
+    description: {
+        type: String,
+        default: "",
+    },
     videos: [String],
     thumbnail: String,
-    difficulty: Number,
+    difficulty: {
+        type: Number,
+        default: 0,
+    },
     previousCourse: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Course",
@@ -28,6 +34,7 @@ const courseSchema = new mongoose.Schema({
         default: 1,
         // required: true,
     },
+    order: Number,
     creatorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

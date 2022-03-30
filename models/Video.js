@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"); // since we are using mongoose we have to require it
+const mongoose = require("mongoose");
 
 const videoSchema = new mongoose.Schema({
     title: {
@@ -6,7 +6,10 @@ const videoSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    description: String,
+    description: {
+        type: String,
+        default: "",
+    },
     timeLength: Number,
     videoURI: {
         type: String,
@@ -19,7 +22,10 @@ const videoSchema = new mongoose.Schema({
         required: true,
     },
     thumbnail: String,
-    difficulty: Number,
+    difficulty: {
+        type: Number,
+        default: 0,
+    },
     order: Number,
     pageReference: Number,
     views: {

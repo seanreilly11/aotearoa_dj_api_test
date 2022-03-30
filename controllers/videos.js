@@ -8,12 +8,27 @@ exports.getVideos = async (req, res, next) => {
     try {
         const videos = await Video.find({ status: { $ne: 2 } });
 
-        return res.status(200).json({
-            count: videos.length,
-            data: videos,
-        });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(200).json(videos);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
+// @desc Add new video
+// @route POST /api/v1/videos
+exports.addVideo = async (req, res, next) => {
+    try {
+        const video = await Video.create(req.body);
+        const course = await Course.updateOne(
+            {
+                _id: req.body.courseId,
+            },
+            { $push: { videos: video._id } }
+        );
+
+        return res.status(201).json(video);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
     }
 };
 
@@ -22,12 +37,9 @@ exports.getVideos = async (req, res, next) => {
 exports.getVideosUnrestricted = async (req, res, next) => {
     try {
         const videos = await Video.find();
-        return res.status(200).json({
-            count: videos.length,
-            data: videos,
-        });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(200).json(videos);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
     }
 };
 
@@ -43,11 +55,9 @@ exports.getVideoByID = async (req, res, next) => {
             });
         }
 
-        return res.status(200).json({
-            data: video,
-        });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(200).json(video);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
     }
 };
 
@@ -63,60 +73,22 @@ exports.getVideosByCourse = async (req, res, next) => {
             });
         }
 
-        return res.status(200).json({
-            data: videos,
-        });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-};
-
-// @desc Add new video
-// @route POST /api/v1/videos/
-exports.addVideo = async (req, res, next) => {
-    try {
-        const video = await Video.create(req.body);
-        const course = await Course.updateOne(
-            {
-                _id: req.body.courseId,
-            },
-            { $push: { videos: video._id } }
-        );
-
-        return res.status(201).json({
-            data: video,
-        });
+        return res.status(200).json(videos);
     } catch (err) {
-        if (err.name === "ValidationError") {
-            const messages = Object.values(err.errors).map(
-                (val) => val.message
-            );
-            return res.status(400).json({
-                error: messages,
-            });
-        } else {
-            return res.status(500).json({
-                error: err.message,
-            });
-        }
+        return res.status(500).json({ error: err.message });
     }
 };
 
 // @desc increment view count of video
-// @route PATCH /api/v1/videos/view
+// @route PATCH /api/v1/videos/view/:id
 exports.viewVideo = async (req, res, next) => {
     try {
-        const { videoId, userId } = req.body;
-        const user = await User.findById(userId);
+        const videoId = req.params.id;
         const videoCheck = await Video.findById(videoId);
 
-        if (!user || !videoCheck)
+        if (!videoCheck)
             return res.status(404).json({
-                error: "Video or user not found",
-            });
-        else if (user.videosCompleted.includes(videoId))
-            return res.status(403).json({
-                error: "Video already viewed by user",
+                error: "Video not found",
             });
         else {
             const video = await Video.updateOne(
@@ -130,6 +102,32 @@ exports.viewVideo = async (req, res, next) => {
                     $inc: { views: 1 },
                 }
             );
+            return res.status(200).json(true);
+        }
+    } catch (err) {
+        return res.status(500).json({
+            error: err.message,
+        });
+    }
+};
+
+// @desc add video id to users videos completed
+// @route PATCH /api/v1/videos/completed
+exports.completeVideo = async (req, res, next) => {
+    try {
+        const { videoId, userId } = req.body;
+        const user = await User.findById(userId);
+        const videoCheck = await Video.findById(videoId);
+
+        if (!user || !videoCheck)
+            return res.status(404).json({
+                error: "Video or user not found",
+            });
+        else if (user.videosCompleted.includes(videoId))
+            return res.status(403).json({
+                error: "Video already completed by user",
+            });
+        else {
             const updatedUser = await User.updateOne(
                 {
                     _id: userId,
@@ -141,9 +139,7 @@ exports.viewVideo = async (req, res, next) => {
                     $push: { videosCompleted: videoId },
                 }
             );
-            return res.status(200).json({
-                data: video,
-            });
+            return res.status(200).json(true);
         }
     } catch (err) {
         return res.status(500).json({
@@ -153,10 +149,10 @@ exports.viewVideo = async (req, res, next) => {
 };
 
 // @desc remove video
-// @route PATCH /api/v1/videos/remove
+// @route PATCH /api/v1/videos/remove/:id
 exports.removeVideo = async (req, res, next) => {
     try {
-        const { videoId } = req.body;
+        const { id: videoId } = req.params;
         const videoCheck = await Video.findById(videoId);
 
         if (!videoCheck)
@@ -175,9 +171,7 @@ exports.removeVideo = async (req, res, next) => {
                     $set: { status: 2 },
                 }
             );
-            return res.status(200).json({
-                data: video,
-            });
+            return res.status(200).json(video);
         }
     } catch (err) {
         return res.status(500).json({
@@ -209,9 +203,7 @@ exports.updateVideo = async (req, res, next) => {
                     $set: req.body,
                 }
             );
-            return res.status(200).json({
-                data: video,
-            });
+            return res.status(200).json(video);
         }
     } catch (err) {
         return res.status(500).json({

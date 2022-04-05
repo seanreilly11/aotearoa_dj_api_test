@@ -30,6 +30,90 @@ exports.getUserByID = async (req, res, next) => {
     }
 };
 
+// @desc login user
+// @route POST /api/v1/users/login
+exports.loginUser = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (user) {
+            if (bcryptjs.compareSync(req.body.password, user.password)) {
+                const updateUser = await User.updateOne(
+                    {
+                        _id: user._id,
+                    },
+                    {
+                        $currentDate: {
+                            updatedDate: true,
+                            lastLogin: true,
+                        },
+                        $set: { securityKey: generateSecurityKey(false) },
+                    }
+                );
+                const userWithToken = await User.findById(user._id);
+                return res
+                    .status(200)
+                    .json({ ...userWithToken._doc, password: undefined });
+            } else {
+                return res.status(401).json({
+                    error: "Not authorised. Incorrect password",
+                });
+            }
+        } else {
+            return res.status(404).json({
+                error: "User not found",
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({
+            error: err.message,
+        });
+    }
+};
+
+// @desc login user on console
+// @route POST /api/v1/users/adminlogin
+exports.loginAdminUser = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (user) {
+            if (bcryptjs.compareSync(req.body.password, user.password)) {
+                if (user.admin) {
+                    const updateUser = await User.updateOne(
+                        {
+                            _id: user._id,
+                        },
+                        {
+                            $currentDate: {
+                                updatedDate: true,
+                            },
+                            $set: { securityKey: generateSecurityKey(true) },
+                        }
+                    );
+                    const userWithToken = await User.findById(user._id);
+                    return res.status(200).json({
+                        uid: userWithToken._id,
+                        token: userWithToken.securityKey,
+                        firstname: userWithToken.firstname,
+                    });
+                } else
+                    return res.status(403).json({
+                        error: "Not authorised. Not admin",
+                    });
+            } else
+                return res.status(401).json({
+                    error: "Not authorised. Incorrect password",
+                });
+        } else
+            return res.status(404).json({
+                error: "User not found",
+            });
+    } catch (err) {
+        return res.status(500).json({
+            error: err.message,
+        });
+    }
+};
+
 // @desc Add new user
 // @route POST /api/v1/users
 exports.registerUser = async (req, res, next) => {
@@ -132,92 +216,6 @@ exports.updateUser = async (req, res, next) => {
             );
             return res.status(200).json(user);
         }
-    } catch (err) {
-        return res.status(500).json({
-            error: err.message,
-        });
-    }
-};
-
-// @desc login user
-// @route POST /api/v1/users/login
-exports.loginUser = async (req, res, next) => {
-    try {
-        const user = await User.findOne({ email: req.body.email });
-        if (user) {
-            if (bcryptjs.compareSync(req.body.password, user.password)) {
-                const updateUser = await User.updateOne(
-                    {
-                        _id: user._id,
-                    },
-                    {
-                        $currentDate: {
-                            updatedDate: true,
-                            lastLogin: true,
-                        },
-                        $set: { securityKey: generateSecurityKey(false) },
-                    }
-                );
-                const userWithToken = await User.findById(user._id);
-                return res.status(200).json({
-                    uid: userWithToken._id,
-                    token: userWithToken.securityKey,
-                    firstname: userWithToken.firstname,
-                });
-            } else {
-                return res.status(401).json({
-                    error: "Not authorised. Incorrect password",
-                });
-            }
-        } else {
-            return res.status(404).json({
-                error: "User not found",
-            });
-        }
-    } catch (err) {
-        return res.status(500).json({
-            error: err.message,
-        });
-    }
-};
-
-// @desc login user on console
-// @route POST /api/v1/users/adminlogin
-exports.loginAdminUser = async (req, res, next) => {
-    try {
-        const user = await User.findOne({ email: req.body.email });
-        if (user) {
-            if (bcryptjs.compareSync(req.body.password, user.password)) {
-                if (user.admin) {
-                    const updateUser = await User.updateOne(
-                        {
-                            _id: user._id,
-                        },
-                        {
-                            $currentDate: {
-                                updatedDate: true,
-                            },
-                            $set: { securityKey: generateSecurityKey(true) },
-                        }
-                    );
-                    const userWithToken = await User.findById(user._id);
-                    return res.status(200).json({
-                        uid: userWithToken._id,
-                        token: userWithToken.securityKey,
-                        firstname: userWithToken.firstname,
-                    });
-                } else
-                    return res.status(403).json({
-                        error: "Not authorised. Not admin",
-                    });
-            } else
-                return res.status(401).json({
-                    error: "Not authorised. Incorrect password",
-                });
-        } else
-            return res.status(404).json({
-                error: "User not found",
-            });
     } catch (err) {
         return res.status(500).json({
             error: err.message,

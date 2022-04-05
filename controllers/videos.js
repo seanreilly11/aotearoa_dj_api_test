@@ -14,24 +14,6 @@ exports.getVideos = async (req, res, next) => {
     }
 };
 
-// @desc Add new video
-// @route POST /api/v1/videos
-exports.addVideo = async (req, res, next) => {
-    try {
-        const video = await Video.create(req.body);
-        const course = await Course.updateOne(
-            {
-                _id: req.body.courseId,
-            },
-            { $push: { videos: video._id } }
-        );
-
-        return res.status(201).json(video);
-    } catch (err) {
-        return res.status(500).json({ error: err.message });
-    }
-};
-
 // @desc Get all videos despite status
 // @route GET /api/v1/videos/unrestricted
 exports.getVideosUnrestricted = async (req, res, next) => {
@@ -56,6 +38,24 @@ exports.getVideoByID = async (req, res, next) => {
         }
 
         return res.status(200).json(video);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
+// @desc Add new video
+// @route POST /api/v1/videos
+exports.addVideo = async (req, res, next) => {
+    try {
+        const video = await Video.create(req.body);
+        const course = await Course.updateOne(
+            {
+                _id: req.body.courseId,
+            },
+            { $push: { videos: video._id } }
+        );
+
+        return res.status(201).json(video);
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }
@@ -112,10 +112,10 @@ exports.viewVideo = async (req, res, next) => {
 };
 
 // @desc add video id to users videos completed
-// @route PATCH /api/v1/videos/completed
+// @route PATCH /api/v1/videos/complete?videoId=:videoId&userId=:userId
 exports.completeVideo = async (req, res, next) => {
     try {
-        const { videoId, userId } = req.body;
+        const { videoId, userId } = req.query;
         const user = await User.findById(userId);
         const videoCheck = await Video.findById(videoId);
 

@@ -91,21 +91,22 @@ exports.updateCourse = async (req, res, next) => {
     }
 };
 
+// TODO: fix this. Need to understand what it's actually for
 // @desc increment students count of course
-// @route PATCH /api/v1/courses/enrol
+// @route PATCH /api/v1/courses/enrol?courseId=:courseId&userId=:userId
 exports.addStudentToCourse = async (req, res, next) => {
     try {
-        const { courseId, userId } = req.body;
+        const { courseId, userId } = req.query;
         const user = await User.findById(userId);
         const courseCheck = await Course.findById(courseId);
 
         if (!user || !courseCheck)
             return res.status(404).json({
-                error: "Video or user not found",
+                error: "Course or user not found",
             });
         else if (user.coursesCompleted.includes(courseId))
             return res.status(403).json({
-                error: "Video already viewed by user",
+                error: "User already enrolled in course",
             });
         else {
             const course = await Course.updateOne(
@@ -127,7 +128,7 @@ exports.addStudentToCourse = async (req, res, next) => {
                     $currentDate: {
                         updatedDate: true,
                     },
-                    $push: { videosCompleted: courseId },
+                    $push: { coursesCompleted: courseId },
                 }
             );
             return res.status(200).json(video);

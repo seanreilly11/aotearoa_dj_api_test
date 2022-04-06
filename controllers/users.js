@@ -50,9 +50,11 @@ exports.loginUser = async (req, res, next) => {
                     }
                 );
                 const userWithToken = await User.findById(user._id);
-                return res
-                    .status(200)
-                    .json({ ...userWithToken._doc, password: undefined });
+                return res.status(200).json({
+                    uid: userWithToken._id,
+                    token: userWithToken.securityKey,
+                });
+                // return res.status(200).json({ ...userWithToken._doc, password: undefined });
             } else {
                 return res.status(401).json({
                     error: "Not authorised. Incorrect password",

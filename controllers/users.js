@@ -147,9 +147,7 @@ exports.registerUser = async (req, res, next) => {
         });
     } catch (err) {
         if (err.name === "ValidationError") {
-            const messages = Object.values(err.errors).map(
-                (val) => val.message
-            );
+            const messages = Object.values(err.errors).map((val) => val.message);
             return res.status(400).json({
                 error: messages,
             });
@@ -225,10 +223,28 @@ exports.updateUser = async (req, res, next) => {
     }
 };
 
+// @desc Get users completed courses and videos
+// @route GET /api/v1/users/completed/:id
+exports.getUsersCompletedItems = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+
+        if (!user)
+            return res.status(404).json({
+                error: "No user found",
+            });
+
+        return res
+            .status(200)
+            .json({ courses: user.coursesCompleted, videos: user.videosCompleted });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
 function generateSecurityKey(isAdmin) {
     var length = isAdmin ? 8 : 16,
-        charset =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
         retVal = "";
     for (var i = 0, n = charset.length; i < length; ++i)
         retVal += charset.charAt(Math.floor(Math.random() * n));

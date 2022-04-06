@@ -8,16 +8,19 @@ const {
     updateUser,
     loginUser,
     loginAdminUser,
+    getUsersCompletedItems,
 } = require("../controllers/users");
 
 router.route("/").get(getUsers).post(registerUser);
 
-router.route("/:id").get(getUserByID).patch(updateUser);
-
-router.route("/adminrights").patch(makeUserAdmin);
-
 router.route("/login").post(loginUser);
 
 router.route("/adminlogin").post(loginAdminUser);
+
+router.route("/adminrights").patch(makeUserAdmin);
+
+router.route("/completed/:id").get(getUsersCompletedItems);
+
+router.route("/:id").get(getUserByID).patch(updateUser);
 
 module.exports = router;

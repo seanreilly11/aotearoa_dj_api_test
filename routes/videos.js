@@ -4,7 +4,6 @@ const upload = require("../middlewares/multer");
 const {
     getVideos,
     addVideo,
-    getVideosUnrestricted,
     getVideoByID,
     getVideosByCourse,
     viewVideo,
@@ -14,8 +13,6 @@ const {
 } = require("../controllers/videos");
 
 router.route("/").get(getVideos).post(addVideo);
-
-router.route("/unrestricted").get(getVideosUnrestricted);
 
 router.route("/complete").patch(completeVideo);
 

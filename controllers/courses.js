@@ -6,7 +6,10 @@ const Video = require("../models/Video");
 exports.getCourses = async (req, res, next) => {
     try {
         const authHeader = req.header("Authorization");
-        const courses = await Course.find();
+        const { accessLevel } = req.query;
+        const filter = accessLevel == 1 ? {} : { status: { $eq: 1 } };
+        const courses = await Course.find(filter).sort({ createdDate: 1 });
+
         return res.status(200).json(courses);
     } catch (err) {
         return res.status(500).json({ error: err.message });
@@ -22,7 +25,7 @@ exports.getCourseByID = async (req, res, next) => {
         const videos = await Video.find({
             courseId: id,
             status: { $ne: 2 },
-        });
+        }).sort({ createdDate: 1 });
 
         if (!course) {
             return res.status(404).json({
@@ -45,9 +48,7 @@ exports.addCourse = async (req, res, next) => {
         return res.status(201).json(course);
     } catch (err) {
         if (err.name === "ValidationError") {
-            const messages = Object.values(err.errors).map(
-                (val) => val.message
-            );
+            const messages = Object.values(err.errors).map((val) => val.message);
             return res.status(400).json({
                 error: messages,
             });

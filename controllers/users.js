@@ -5,7 +5,7 @@ const User = require("../models/User");
 // @route GET /api/v1/users
 exports.getUsers = async (req, res, next) => {
     try {
-        const users = await User.find();
+        const users = await User.find().sort({ lastLogin: -1 });
         return res.status(200).json(users);
     } catch (err) {
         return res.status(500).json({ error: error.message });

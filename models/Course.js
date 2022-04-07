@@ -10,8 +10,14 @@ const courseSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
-    videos: [String],
-    thumbnail: String,
+    videos: {
+        type: [String],
+        default: [],
+    },
+    thumbnail: {
+        type: String,
+        default: "",
+    },
     difficulty: {
         type: Number,
         default: 0,
@@ -22,7 +28,7 @@ const courseSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        // required: true, TODO:
+        required: true,
         trim: true,
     },
     totalStudents: {
@@ -32,7 +38,6 @@ const courseSchema = new mongoose.Schema({
     status: {
         type: Number,
         default: 1,
-        // required: true,
     },
     order: Number,
     creatorId: {
@@ -43,7 +48,10 @@ const courseSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    updatedDate: Date,
+    updatedDate: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model("Course", courseSchema);

@@ -8,7 +8,7 @@ exports.getCourses = async (req, res, next) => {
         const authHeader = req.header("Authorization");
         const { accessLevel } = req.query;
         const filter = accessLevel == 1 ? {} : { status: { $eq: 1 } };
-        const courses = await Course.find(filter).sort({ createdDate: 1 });
+        const courses = await Course.find(filter).sort({ status: 1, createdDate: 1 }); // active ones on top sorted by date
 
         return res.status(200).json(courses);
     } catch (err) {
@@ -25,7 +25,7 @@ exports.getCourseByID = async (req, res, next) => {
         const filter = accessLevel == 1 ? { courseId: id } : { courseId: id, status: { $eq: 1 } };
 
         const course = await Course.findById(id);
-        const videos = await Video.find(filter).sort({ createdDate: 1 });
+        const videos = await Video.find(filter).sort({ status: 1, createdDate: 1 });
 
         if (!course)
             return res.status(404).json({

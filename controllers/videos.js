@@ -162,7 +162,7 @@ exports.removeVideo = async (req, res, next) => {
                     $set: { status: 2 },
                 }
             );
-            return res.status(200).json(video);
+            return res.status(200).json(true);
         }
     } catch (err) {
         return res.status(500).json({

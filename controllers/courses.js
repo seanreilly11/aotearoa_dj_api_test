@@ -21,17 +21,16 @@ exports.getCourses = async (req, res, next) => {
 exports.getCourseByID = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const course = await Course.findById(id);
-        const videos = await Video.find({
-            courseId: id,
-            status: { $ne: 2 },
-        }).sort({ createdDate: 1 });
+        const { accessLevel } = req.query;
+        const filter = accessLevel == 1 ? { courseId: id } : { courseId: id, status: { $eq: 1 } };
 
-        if (!course) {
+        const course = await Course.findById(id);
+        const videos = await Video.find(filter).sort({ createdDate: 1 });
+
+        if (!course)
             return res.status(404).json({
                 error: "No course found",
             });
-        }
 
         return res.status(200).json({ ...course._doc, videos });
     } catch (err) {
@@ -133,6 +132,49 @@ exports.addStudentToCourse = async (req, res, next) => {
                 }
             );
             return res.status(200).json(video);
+        }
+    } catch (err) {
+        return res.status(500).json({
+            error: err.message,
+        });
+    }
+};
+
+// @desc remove course
+// @route PATCH /api/v1/courses/remove/:id
+exports.removeCourse = async (req, res, next) => {
+    try {
+        const { id: courseId } = req.params;
+        const courseCheck = await Course.findById(courseId);
+
+        if (!courseCheck)
+            return res.status(404).json({
+                error: "Course not found",
+            });
+        else {
+            const course = await Course.updateOne(
+                {
+                    _id: courseId,
+                },
+                {
+                    $currentDate: {
+                        updatedDate: true,
+                    },
+                    $set: { status: 2 },
+                }
+            );
+            const videos = await Video.updateMany(
+                {
+                    courseId: courseId,
+                },
+                {
+                    $currentDate: {
+                        updatedDate: true,
+                    },
+                    $set: { status: 2 },
+                }
+            );
+            return res.status(200).json(true);
         }
     } catch (err) {
         return res.status(500).json({

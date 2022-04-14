@@ -1,13 +1,14 @@
 const Video = require("../models/Video");
 const Course = require("../models/Course");
 const User = require("../models/User");
+const utils = require("./utils");
 
 // @desc Get all videos. Access level 1 returns no filter - should be used for console. No access level returns active status only - app
 // @route GET /api/v1/videos
 exports.getVideos = async (req, res, next) => {
     try {
         const { accessLevel } = req.query;
-        const filter = accessLevel == 1 ? {} : { status: { $eq: 1 } };
+        const filter = accessLevel == 1 ? {} : { status: utils.isActive() };
         const videos = await Video.find(filter).sort({ createdDate: 1 });
 
         return res.status(200).json(videos);
@@ -52,7 +53,7 @@ exports.addVideo = async (req, res, next) => {
     }
 };
 
-// @desc Get video by course
+// @desc Get video by course. Don't really need as videos are returned with course details
 // @route GET /api/v1/videos/courses/:id
 exports.getVideosByCourse = async (req, res, next) => {
     try {

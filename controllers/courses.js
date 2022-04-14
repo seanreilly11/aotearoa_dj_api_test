@@ -1,5 +1,6 @@
 const Course = require("../models/Course");
 const Video = require("../models/Video");
+const utils = require("./utils");
 
 // @desc Get all courses
 // @route GET /api/courses
@@ -7,7 +8,7 @@ exports.getCourses = async (req, res, next) => {
     try {
         const authHeader = req.header("Authorization");
         const { accessLevel } = req.query;
-        const filter = accessLevel == 1 ? {} : { status: { $eq: 1 } };
+        const filter = accessLevel == 1 ? {} : { status: utils.isActive() };
         const courses = await Course.find(filter).sort({ status: 1, createdDate: 1 }); // active ones on top sorted by date
 
         return res.status(200).json(courses);
@@ -22,7 +23,8 @@ exports.getCourseByID = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { accessLevel } = req.query;
-        const filter = accessLevel == 1 ? { courseId: id } : { courseId: id, status: { $eq: 1 } };
+        const filter =
+            accessLevel == 1 ? { courseId: id } : { courseId: id, status: utils.isActive() };
 
         const course = await Course.findById(id);
         const videos = await Video.find(filter).sort({ status: 1, createdDate: 1 });

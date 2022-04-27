@@ -11,7 +11,7 @@ connectDB();
 
 const app = express();
 
-// app.use(express.static("client_console/index.html"));
+app.use(express.static("client_console"));
 app.use(compression());
 app.use(helmet());
 app.use(express.json());

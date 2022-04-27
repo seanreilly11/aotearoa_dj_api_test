@@ -122,7 +122,8 @@ exports.registerUser = async (req, res, next) => {
     try {
         const { firstname, lastname, email, password } = req.body;
         User.findOne({ email }, (err, result) => {
-            if (result) {
+            if (err) return res.status(500).json({ error: err.message });
+            else if (result) {
                 return res.status(409).json({
                     error: "Email is taken",
                 });

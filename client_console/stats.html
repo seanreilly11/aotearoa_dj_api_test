@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <!-- begin::Head -->
+
+    <head>
+        <!-- <base href="" /> -->
+        <meta charset="utf-8" />
+        <title>Aotearoa DJ Academy | Stats</title>
+        <meta name="description" content="Banknote profile overview example" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!--begin::Fonts -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700"
+        />
+
+        <!--end::Fonts -->
+
+        <!--begin::Global Theme Styles(used by all pages) -->
+        <link
+            href="assets/plugins/global/plugins.bundle.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="assets/css/style.bundle.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css"
+        />
+
+        <!--end::Global Theme Styles -->
+
+        <!--begin::Custom Styles -->
+        <link
+            href="assets/css/pages/profile/profile.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <!--end::Custom Styles -->
+
+        <!--begin::Layout Skins(used by all pages) -->
+        <link
+            href="assets/css/skins/header/base/light.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="assets/css/skins/header/menu/light.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="assets/css/skins/brand/dark.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="assets/css/skins/aside/dark.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!--end::Layout Skins -->
+        <link rel="shortcut icon" href="asset/images/FavIcon.png" />
+
+        <script src="asset/js/tribes.js"></script>
+    </head>
+
+    <!-- end::Head -->
+
+    <!-- begin::Body -->
+
+    <body
+        class="kt-app__aside--left kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading"
+    >
+        <!-- begin:: Page -->
+
+        <!-- begin:: Header Mobile -->
+        <div
+            id="kt_header_mobile"
+            class="kt-header-mobile kt-header-mobile--fixed"
+        >
+            <div class="kt-header-mobile__logo">
+                <a href="index.html">
+                    <img alt="Logo" src="asset/images/logo-jaguarnetwork.png" />
+                </a>
+            </div>
+            <div class="kt-header-mobile__toolbar">
+                <button
+                    class="kt-header-mobile__toggler kt-header-mobile__toggler--left"
+                    id="kt_aside_mobile_toggler"
+                >
+                    <span></span>
+                </button>
+                <button
+                    class="kt-header-mobile__toggler"
+                    id="kt_header_mobile_toggler"
+                >
+                    <span></span>
+                </button>
+                <button
+                    class="kt-header-mobile__topbar-toggler"
+                    id="kt_header_mobile_topbar_toggler"
+                >
+                    <i class="flaticon-more"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- end:: Header Mobile -->
+        <div class="kt-grid kt-grid--hor kt-grid--root">
+            <div
+                class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page"
+            >
+                <!-- begin:: Aside -->
+
+                <!-- Uncomment this to display the close button of the panel
+<button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+-->
+                <div class="aside-wrapper">
+                    <div class="aside--header">
+                        <div class="aside--logo">
+                            <h3>Aotearoa DJs</h3>
+                            <!-- <img
+                                alt="Logo"
+                                src="asset/images/logo-jaguarnetwork.png"
+                                style="width: 126px"
+                            /> -->
+                        </div>
+                    </div>
+                    <div class="aside--menu">
+                        <ul class="aside--menu-list">
+                            <a href="map.html"
+                                ><li class="aside--menu-item">Courses</li></a
+                            >
+                            <a href="users.html"
+                                ><li class="aside--menu-item">Users</li></a
+                            >
+                            <a href="stats.html"
+                                ><li
+                                    class="aside--menu-item aside--menu-item--active"
+                                >
+                                    Stats
+                                </li></a
+                            >
+                            <a href="settings.html"
+                                ><li class="aside--menu-item">Settings</li></a
+                            >
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Aside -->
+                <div
+                    class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper"
+                    id="kt_wrapper"
+                >
+                    <!-- begin:: Header -->
+                    <div
+                        id="kt_header"
+                        class="kt-header kt-grid__item kt-header--fixed"
+                    >
+                        <!-- begin:: Header Topbar -->
+                        <div
+                            class="kt-header__topbar w-100 justify-content-end"
+                        >
+                            <!--begin: User Bar -->
+                            <div
+                                class="kt-header__topbar-item kt-header__topbar-item--user"
+                            >
+                                <div
+                                    class="kt-header__topbar-wrapper"
+                                    data-toggle="dropdown"
+                                    data-offset="0px,0px"
+                                >
+                                    <div class="kt-header__topbar-user">
+                                        <span
+                                            class="kt-header__topbar-welcome kt-hidden-mobile"
+                                            >Bonjour,</span
+                                        >
+                                        <span
+                                            class="kt-header__topbar-username kt-hidden-mobile"
+                                            id="userId"
+                                            >User</span
+                                        >
+
+                                        <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                        <span
+                                            class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold"
+                                            id="userLetter"
+                                            >U</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl"
+                                >
+                                    <!--begin: Head -->
+                                    <div
+                                        class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
+                                        style="
+                                            background-image: url(assets/media/misc/bg-1.jpg);
+                                        "
+                                    >
+                                        <div class="kt-user-card__avatar">
+                                            <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                            <span
+                                                class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success"
+                                                id="userLetter1"
+                                                >U</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="kt-user-card__name"
+                                            id="userId1"
+                                        >
+                                            User
+                                        </div>
+                                    </div>
+
+                                    <!--end: Head -->
+
+                                    <!--begin: Navigation -->
+                                    <div class="kt-notification">
+                                        <div
+                                            class="kt-notification__custom kt-space-between"
+                                        >
+                                            <a
+                                                href="index.html"
+                                                class="btn btn-label btn-label-brand btn-sm btn-bold"
+                                                >Déconnexion</a
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <!--end: Navigation -->
+                                </div>
+                            </div>
+
+                            <!--end: User Bar -->
+                        </div>
+
+                        <!-- end:: Header Topbar -->
+                    </div>
+
+                    <!-- end:: Header -->
+                    <div
+                        class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+                        id="kt_content"
+                    >
+                        <!-- begin:: Subheader -->
+                        <div
+                            class="kt-subheader kt-grid__item"
+                            id="kt_subheader"
+                        >
+                            <div class="kt-container kt-container--fluid">
+                                <div class="kt-subheader__main">
+                                    <h3 class="kt-subheader__title">
+                                        <button
+                                            class="kt-subheader__mobile-toggle kt-subheader__mobile-toggle--left"
+                                            id="kt_subheader_mobile_toggle"
+                                        >
+                                            <span></span>
+                                        </button>
+                                    </h3>
+                                    <span
+                                        class="kt-subheader__separator kt-hidden"
+                                    ></span>
+                                    <div class="kt-subheader__breadcrumbs">
+                                        <a
+                                            href="map.html"
+                                            class="kt-subheader__breadcrumbs-home"
+                                            ><i class="flaticon2-shelter"></i
+                                        ></a>
+                                        <span
+                                            class="kt-subheader__breadcrumbs-separator"
+                                        ></span>
+                                        <span
+                                            class="kt-subheader__breadcrumbs-link"
+                                            >Stats</span
+                                        >
+                                        <!-- <div
+                                            class="input-group w-auto ml-3"
+                                            id="kt_daterangepicker"
+                                        >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                readonly
+                                                name="daterange"
+                                                placeholder="Choisir une période"
+                                            />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"
+                                                    ><i class="la la-calendar-check-o"></i
+                                                ></span>
+                                            </div>
+                                        </div> -->
+                                        <select
+                                            id="dashboard-period-select"
+                                            class="form-control w-auto ml-2"
+                                        >
+                                            <option value="1-D">1 jour</option>
+                                            <option value="7-D">7 jours</option>
+                                            <option value="15-D">
+                                                15 jours
+                                            </option>
+                                            <option value="30-D" selected>
+                                                30 jours
+                                            </option>
+                                            <option value="2-M">2 mois</option>
+                                            <option value="3-M">3 mois</option>
+                                            <option value="6-M">6 mois</option>
+                                            <option value="12-M">1 an</option>
+                                        </select>
+                                        <!-- <button
+                                            class="btn font-crosscall ml-2"
+                                            id="datepicker-reset-date"
+                                        >
+                                            Réinitialiser la période
+                                        </button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end:: Subheader -->
+
+                        <!-- begin:: Content -->
+                        <div
+                            class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid"
+                        >
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="stats-section-title">
+                                        Leads sur
+                                        <span class="stats-period-text"
+                                            >les 30 derniers jours</span
+                                        >
+                                    </h5>
+                                </div>
+                            </div>
+
+                            <!-- TODO: will make this dynamic on change of date-->
+                            <!--Begin::Section-->
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Nombre de leads achetes
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--chart">
+                                                <div
+                                                    class="stats-widget--stat"
+                                                    id="widget1-number"
+                                                ></div>
+                                                <canvas
+                                                    id="widget1-chart"
+                                                    style="
+                                                        height: 140px;
+                                                        width: 140px;
+                                                    "
+                                                ></canvas>
+                                            </div>
+                                            <div class="stats-widget--legends">
+                                                <div
+                                                    class="stats-widget--legend"
+                                                >
+                                                    <span
+                                                        class="stats-widget--legend-text bg-status-clos"
+                                                    >
+                                                        Lead clos:</span
+                                                    >
+                                                    <span
+                                                        id="widget1-clos"
+                                                    ></span>
+                                                </div>
+                                                <div
+                                                    class="stats-widget--legend"
+                                                >
+                                                    <span
+                                                        class="stats-widget--legend-text"
+                                                    >
+                                                        Leads en cours:</span
+                                                    >
+                                                    <span
+                                                        id="widget1-encours"
+                                                    ></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Enquetes
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--chart">
+                                                <div
+                                                    class="stats-widget--stat"
+                                                    id="widget2-number"
+                                                ></div>
+                                                <canvas
+                                                    id="widget2-chart"
+                                                    style="
+                                                        height: 140px;
+                                                        width: 140px;
+                                                    "
+                                                ></canvas>
+                                            </div>
+                                            <div class="stats-widget--legends">
+                                                <div
+                                                    class="stats-widget--legend"
+                                                >
+                                                    <span
+                                                        class="stats-widget--legend-text bg-status-terminees"
+                                                    >
+                                                        Enquetes
+                                                        terminees:</span
+                                                    >
+                                                    <span
+                                                        id="widget2-terminees"
+                                                    ></span>
+                                                </div>
+                                                <div
+                                                    class="stats-widget--legend"
+                                                >
+                                                    <span
+                                                        class="stats-widget--legend-text bg-status-enattente"
+                                                    >
+                                                        Enquetes en
+                                                        attente:</span
+                                                    >
+                                                    <span
+                                                        id="widget2-enattente"
+                                                    ></span>
+                                                </div>
+                                                <div
+                                                    class="stats-widget--legend"
+                                                >
+                                                    <span
+                                                        class="stats-widget--legend-text"
+                                                    >
+                                                        Enquetes non
+                                                        realises:</span
+                                                    >
+                                                    <span
+                                                        id="widget2-nonrealises"
+                                                    ></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-4 col-xl-6">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Lead achetes
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--chart">
+                                                <canvas
+                                                    id="widget3-chart"
+                                                ></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-8 col-xl-6">
+                                    <h5 class="stats-section-title">
+                                        Satisfaction sur
+                                        <span class="stats-period-text"
+                                            >les 30 derniers jours</span
+                                        >
+                                    </h5>
+                                </div>
+                                <div class="col-12 col-lg-4 col-xl-6">
+                                    <h5 class="stats-section-title">Budget</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Moyenne satisfaction client
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--stars">
+                                                <div id="widget4-chart"></div>
+                                                <span
+                                                    class="stats-widget--ratings-text"
+                                                    id="widget4-text"
+                                                ></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Moyenne satisfaction Users
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--stars">
+                                                <div id="widget5-chart"></div>
+                                                <span
+                                                    class="stats-widget--ratings-text"
+                                                    id="widget5-text"
+                                                ></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Budget
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--stars">
+                                                <div
+                                                    class="stats-widget--budget"
+                                                >
+                                                    <span
+                                                        id="widget6-text"
+                                                    ></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="stats-section-title">
+                                        Users sur
+                                        <span class="stats-period-text"
+                                            >les 30 derniers jours</span
+                                        >
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 col-xl-3">
+                                    <div class="row">
+                                        <div class="col-6 col-lg-12">
+                                            <div class="stats-widget--outer">
+                                                <div
+                                                    class="stats-widget--header"
+                                                >
+                                                    <h3
+                                                        class="stats-widget--title"
+                                                    >
+                                                        Nombre total d'Users
+                                                    </h3>
+                                                </div>
+                                                <div
+                                                    class="stats-widget--content"
+                                                >
+                                                    <div
+                                                        class="stats-widget--stars"
+                                                    >
+                                                        <div
+                                                            class="stats-widget--budget"
+                                                        >
+                                                            <span
+                                                                id="widget7-text"
+                                                            ></span>
+                                                            <i
+                                                                class="flaticon2-user-outline-symbol"
+                                                            ></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-12">
+                                            <div class="stats-widget--outer">
+                                                <div
+                                                    class="stats-widget--header"
+                                                >
+                                                    <h3
+                                                        class="stats-widget--title"
+                                                    >
+                                                        Part d'Users actifs
+                                                    </h3>
+                                                </div>
+                                                <div
+                                                    class="stats-widget--content"
+                                                >
+                                                    <div
+                                                        class="stats-widget--stars"
+                                                    >
+                                                        <div
+                                                            class="stats-widget--budget"
+                                                        >
+                                                            <progress
+                                                                class="stats-widget--progress"
+                                                                id="widget8-value"
+                                                                max="100"
+                                                            ></progress>
+                                                            <span
+                                                                class="stats-widget--progress-text"
+                                                                id="widget8-text"
+                                                            ></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-8 col-xl-6">
+                                    <div class="stats-widget--outer">
+                                        <div class="stats-widget--header">
+                                            <h3 class="stats-widget--title">
+                                                Users actifs
+                                            </h3>
+                                        </div>
+                                        <div class="stats-widget--content">
+                                            <div class="stats-widget--chart">
+                                                <canvas
+                                                    id="widget9-chart"
+                                                ></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End::Section-->
+                        </div>
+
+                        <!-- end:: Content -->
+                    </div>
+
+                    <!-- begin:: Footer -->
+                    <div
+                        class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop"
+                        id="kt_footer"
+                    >
+                        <div class="kt-container kt-container--fluid">
+                            <div class="kt-footer__copyright">
+                                2019&nbsp;&copy;&nbsp;<a
+                                    href=""
+                                    target="_blank"
+                                    class="kt-link"
+                                    >Nowsnapp Tribe</a
+                                >
+                            </div>
+                            <div class="kt-footer__menu">
+                                <a
+                                    href=""
+                                    target="_blank"
+                                    class="kt-footer__menu-link kt-link"
+                                    >A propos</a
+                                >
+                                <a
+                                    href=""
+                                    target="_blank"
+                                    class="kt-footer__menu-link kt-link"
+                                    >Support</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end:: Footer -->
+                </div>
+            </div>
+        </div>
+
+        <!-- end:: Page -->
+
+        <!-- begin::Scrolltop -->
+        <div id="kt_scrolltop" class="kt-scrolltop">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+
+        <!-- end::Scrolltop -->
+
+        <!-- begin::Global Config(global config for global JS sciprts) -->
+        <script>
+            var KTAppOptions = {
+                colors: {
+                    state: {
+                        brand: "#5d78ff",
+                        dark: "#282a3c",
+                        light: "#ffffff",
+                        primary: "#ff2727",
+                        success: "#34bfa3",
+                        info: "#36a3f7",
+                        warning: "#ffb822",
+                        danger: "#fd3995",
+                    },
+                    base: {
+                        label: ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                        shape: ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"],
+                    },
+                },
+            };
+        </script>
+
+        <!-- end::Global Config -->
+
+        <!-- begin::Environment Config -->
+        <script src="config/config.js" type="text/javascript"></script>
+        <!-- end::Environment Config -->
+
+        <!--begin::Global Theme Bundle(used by all pages) -->
+        <script
+            src="assets/plugins/global/plugins.bundle.js"
+            type="text/javascript"
+        ></script>
+        <script
+            src="assets/js/scripts.bundle.js"
+            type="text/javascript"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <!--end::Global Theme Bundle -->
+
+        <!--begin::Page Scripts(used by this page) -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script
+            src="assets/js/pages/dashboard.js"
+            type="text/javascript"
+        ></script>
+        <script
+            src="assets/js/pages/custom/stats/stats.js"
+            type="text/javascript"
+        ></script>
+
+        <!--end::Page Scripts -->
+        <script>
+            $(document).ready(function () {
+                initTokenSecurity();
+            });
+        </script>
+    </body>
+
+    <!-- end::Body -->
+</html>

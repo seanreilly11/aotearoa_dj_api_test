@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <!-- begin::Head -->
+    <head>
+        <base href="../../" />
+        <meta charset="utf-8" />
+        <title>Aotearoa DJ Academy</title>
+        <meta name="description" content="Banknote profile overview example" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!--begin::Fonts -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700"
+        />
+
+        <!--end::Fonts -->
+
+        <!--begin::Global Theme Styles(used by all pages) -->
+        <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+        <!--end::Global Theme Styles -->
+
+        <!--begin::Custom Styles -->
+        <link href="assets/css/pages/profile/profile.css" rel="stylesheet" type="text/css" />
+        <!--end::Custom Styles -->
+
+        <!--begin::Layout Skins(used by all pages) -->
+        <link href="assets/css/skins/header/base/light.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/skins/header/menu/light.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/skins/brand/dark.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/skins/aside/dark.css" rel="stylesheet" type="text/css" />
+
+        <!--end::Layout Skins -->
+        <link rel="shortcut icon" href="asset/images/FavIcon.png" />
+
+        <script src="asset/js/tribes.js"></script>
+    </head>
+
+    <!-- end::Head -->
+
+    <!-- begin::Body -->
+    <body
+        class="kt-app__aside--left kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading"
+    >
+        <!-- begin:: Page -->
+
+        <!-- begin:: Header Mobile -->
+        <div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed">
+            <div class="kt-header-mobile__logo">
+                <a href="index.html">
+                    <img alt="Logo" src="asset/images/logo-jaguarnetwork.png" />
+                </a>
+            </div>
+            <div class="kt-header-mobile__toolbar">
+                <button
+                    class="kt-header-mobile__toggler kt-header-mobile__toggler--left"
+                    id="kt_aside_mobile_toggler"
+                >
+                    <span></span>
+                </button>
+                <button class="kt-header-mobile__toggler" id="kt_header_mobile_toggler">
+                    <span></span>
+                </button>
+                <button
+                    class="kt-header-mobile__topbar-toggler"
+                    id="kt_header_mobile_topbar_toggler"
+                >
+                    <i class="flaticon-more"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- end:: Header Mobile -->
+        <div class="kt-grid kt-grid--hor kt-grid--root">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+                <!-- begin:: Aside -->
+
+                <!-- Uncomment this to display the close button of the panel
+<button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+-->
+                <div class="aside-wrapper">
+                    <button type="button" class="btn-close" id="close-aside" aria-label="Close">
+                        <i class="flaticon2-cancel-music"></i>
+                    </button>
+
+                    <div class="aside--header">
+                        <div class="aside--logo">
+                            <!-- <h3>Aotearoa DJs</h3> -->
+                            <img src="asset/images/aotearoa_dj_logo.png" alt="Logo" />
+                        </div>
+                    </div>
+                    <div class="aside--menu">
+                        <ul class="aside--menu-list">
+                            <a href="map.html"
+                                ><li class="aside--menu-item aside--menu-item--active">
+                                    Courses
+                                </li></a
+                            >
+                            <a href="users.html"><li class="aside--menu-item">Users</li></a>
+                            <a href="stats.html"><li class="aside--menu-item">Stats</li></a>
+                            <a href="settings.html"><li class="aside--menu-item">Settings</li></a>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Aside -->
+                <div
+                    class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper"
+                    id="kt_wrapper"
+                >
+                    <!-- begin:: Header -->
+                    <div id="kt_header" class="kt-header kt-grid__item kt-header--fixed">
+                        <!-- begin:: Header Menu -->
+
+                        <!-- Uncomment this to display the close button of the panel
+<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+-->
+                        <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                            <div
+                                id="kt_header_menu"
+                                class="kt-header-menu kt-header-menu-mobile kt-header-menu--layout-default"
+                            >
+                                <ul class="kt-menu__nav">
+                                    <li
+                                        class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel kt-menu__item--active"
+                                    >
+                                        <a href="map.html" class="kt-menu__link">
+                                            <span class="font-weight-normal">Videos</span></a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- end:: Header Menu -->
+
+                        <!-- begin:: Header Topbar -->
+                        <div class="kt-header__topbar">
+                            <!--begin: User Bar -->
+                            <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                                <div
+                                    class="kt-header__topbar-wrapper"
+                                    data-toggle="dropdown"
+                                    data-offset="0px,0px"
+                                >
+                                    <div class="kt-header__topbar-user">
+                                        <span class="kt-header__topbar-welcome kt-hidden-mobile"
+                                            >Bonjour,</span
+                                        >
+                                        <span
+                                            class="kt-header__topbar-username kt-hidden-mobile"
+                                            id="userId"
+                                            >User</span
+                                        >
+
+                                        <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                        <span
+                                            class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold"
+                                            id="userLetter"
+                                            >U</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl"
+                                >
+                                    <!--begin: Head -->
+                                    <div
+                                        class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
+                                        style="background-image: url(assets/media/misc/bg-1.jpg)"
+                                    >
+                                        <div class="kt-user-card__avatar">
+                                            <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                            <span
+                                                class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success"
+                                                id="userLetter1"
+                                                >U</span
+                                            >
+                                        </div>
+                                        <div class="kt-user-card__name" id="userId1">User</div>
+                                    </div>
+
+                                    <!--end: Head -->
+
+                                    <!--begin: Navigation -->
+                                    <div class="kt-notification">
+                                        <div class="kt-notification__custom kt-space-between">
+                                            <a
+                                                href="index.html"
+                                                class="btn btn-label btn-label-brand btn-sm btn-bold"
+                                                >Déconnexion</a
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <!--end: Navigation -->
+                                </div>
+                            </div>
+
+                            <!--end: User Bar -->
+                        </div>
+
+                        <!-- end:: Header Topbar -->
+                    </div>
+
+                    <!-- end:: Header -->
+                    <div
+                        class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+                        id="kt_content"
+                    >
+                        <!-- begin:: Subheader -->
+                        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+                            <div class="kt-container kt-container--fluid">
+                                <div class="kt-subheader__main">
+                                    <h3 class="kt-subheader__title">
+                                        <button
+                                            class="kt-subheader__mobile-toggle kt-subheader__mobile-toggle--left"
+                                            id="kt_subheader_mobile_toggle"
+                                        >
+                                            <span></span>
+                                        </button>
+                                    </h3>
+                                    <span class="kt-subheader__separator kt-hidden"></span>
+                                    <div class="kt-subheader__breadcrumbs">
+                                        <a href="map.html" class="kt-subheader__breadcrumbs-home"
+                                            ><i class="flaticon2-shelter"></i
+                                        ></a>
+                                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                                        <span class="kt-subheader__breadcrumbs-link"
+                                            >Video details</span
+                                        >
+
+                                        <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end:: Subheader -->
+
+                        <!-- begin:: Content -->
+                        <div
+                            class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid"
+                        >
+                            <!--Begin::App-->
+                            <div
+                                class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app"
+                            >
+                                <!--Begin:: App Aside Mobile Toggle-->
+                                <button
+                                    class="kt-app__aside-close"
+                                    id="kt_user_profile_aside_close"
+                                >
+                                    <i class="la la-close"></i>
+                                </button>
+
+                                <!--End:: App Aside Mobile Toggle-->
+
+                                <!--Begin:: App Aside-->
+                                <div
+                                    class="kt-grid__item kt-app__toggle kt-app__aside"
+                                    id="kt_user_profile_aside"
+                                >
+                                    <!--begin:: Widgets/Applications/User/Profile1-->
+                                    <div
+                                        class="kt-portlet kt-portlet--height-fluid- position-relative"
+                                    >
+                                        <div class="kt-portlet__head kt-portlet__head--noborder">
+                                            <div class="kt-portlet__head-label">
+                                                <h3 class="kt-portlet__head-title"></h3>
+                                            </div>
+                                            <div class="kt-portlet__head-toolbar">
+                                                <a
+                                                    href="#"
+                                                    class="btn btn-menu-crosscall btn-sm btn-icon btn-icon-md"
+                                                    data-toggle="dropdown"
+                                                >
+                                                    <i class="flaticon-more-1"></i>
+                                                </a>
+                                                <div
+                                                    class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md"
+                                                >
+                                                    <!--begin::Nav-->
+                                                    <ul class="kt-nav">
+                                                        <li class="kt-nav__head">Actions</li>
+                                                        <li class="kt-nav__separator"></li>
+                                                        <li class="kt-nav__item">
+                                                            <a
+                                                                class="kt-nav__link"
+                                                                id="videopage_editlink"
+                                                            >
+                                                                <i
+                                                                    class="kt-nav__link-icon flaticon2-user-1"
+                                                                ></i>
+                                                                <span class="kt-nav__link-text"
+                                                                    >Edit video</span
+                                                                >
+                                                            </a>
+                                                        </li>
+                                                        <li class="kt-nav__separator"></li>
+                                                        <li class="kt-nav__foot">
+                                                            <button
+                                                                class="btn btn-label-danger btn-bold btn-sm"
+                                                                id="videopage_deletevideo"
+                                                            >
+                                                                Remove video
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <!--end::Nav-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
+                                            <!--begin::Widget -->
+                                            <div class="kt-widget kt-widget--user-profile-1">
+                                                <div class="kt-widget__head">
+                                                    <!-- <div
+                                                        class="kt-widget__media"
+                                                    >
+                                                        <img
+                                                            id="videopage_ticket"
+                                                            alt="image"
+                                                        />
+                                                    </div> -->
+                                                    <div class="kt-widget__content pl-0">
+                                                        <div class="kt-widget__section">
+                                                            <span class="kt-widget__username">
+                                                                <span
+                                                                    class="break-word"
+                                                                    id="videopage_title"
+                                                                ></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-widget__body">
+                                                    <div class="kt-widget__content">
+                                                        <div class="kt-widget__info">
+                                                            <span class="kt-widget__label"
+                                                                >Category</span
+                                                            >
+                                                            <a
+                                                                class="kt-widget__data"
+                                                                id="videopage_category"
+                                                            ></a>
+                                                        </div>
+                                                        <div class="kt-widget__info">
+                                                            <span class="kt-widget__label"
+                                                                >Views</span
+                                                            >
+                                                            <span
+                                                                class="kt-widget__data"
+                                                                id="videopage_views"
+                                                            ></span>
+                                                        </div>
+                                                        <div class="kt-widget__info">
+                                                            <span class="kt-widget__label"
+                                                                >Difficulty</span
+                                                            >
+                                                            <span
+                                                                class="kt-widget__data"
+                                                                id="videopage_difficulty"
+                                                            ></span>
+                                                        </div>
+                                                        <div class="kt-widget__info">
+                                                            <span class="kt-widget__label"
+                                                                >Statut</span
+                                                            >
+                                                            <span
+                                                                class="btn btn-bold btn-sm btn-font-sm"
+                                                                id="videopage_status"
+                                                            ></span>
+                                                        </div>
+                                                        <div class="kt-widget__info pt-4">
+                                                            <span
+                                                                class="kt-widget__data text-left break-word"
+                                                                id="videopage_desc"
+                                                            ></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="kt-widget__items">
+                                                        <a
+                                                            id="crosscall_accessories_toggle"
+                                                            class="kt-widget__item"
+                                                        >
+                                                            <span class="kt-widget__section">
+                                                                <span class="kt-widget__icon">
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        width="24px"
+                                                                        height="24px"
+                                                                        viewBox="0 0 24 24"
+                                                                        version="1.1"
+                                                                        class="kt-svg-icon"
+                                                                    >
+                                                                        <g
+                                                                            stroke="none"
+                                                                            stroke-width="1"
+                                                                            fill="none"
+                                                                            fill-rule="evenodd"
+                                                                        >
+                                                                            <rect
+                                                                                x="0"
+                                                                                y="0"
+                                                                                width="24"
+                                                                                height="24"
+                                                                            />
+                                                                            <path
+                                                                                d="M5,7 L19,7 C20.1045695,7 21,7.8954305 21,9 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,9 C3,7.8954305 3.8954305,7 5,7 Z M12,17 C14.209139,17 16,15.209139 16,13 C16,10.790861 14.209139,9 12,9 C9.790861,9 8,10.790861 8,13 C8,15.209139 9.790861,17 12,17 Z"
+                                                                                fill="#000000"
+                                                                            />
+                                                                            <rect
+                                                                                fill="#000000"
+                                                                                opacity="0.3"
+                                                                                x="9"
+                                                                                y="4"
+                                                                                width="6"
+                                                                                height="2"
+                                                                                rx="1"
+                                                                            />
+                                                                            <circle
+                                                                                fill="#000000"
+                                                                                opacity="0.3"
+                                                                                cx="12"
+                                                                                cy="13"
+                                                                                r="2"
+                                                                            />
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="kt-widget__desc">
+                                                                    Thumbnail
+                                                                </span>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--end::Widget -->
+                                        </div>
+                                    </div>
+
+                                    <!--end:: Widgets/Applications/User/Profile1-->
+                                </div>
+
+                                <!--End:: App Aside-->
+
+                                <!--Begin:: App Content-->
+                                <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
+                                    <div class="row">
+                                        <div class="col">
+                                            <!--begin:: Widgets/Tasks -->
+                                            <div
+                                                class="kt-portlet kt-portlet--tabs kt-portlet--height-fluid"
+                                            >
+                                                <div class="kt-portlet__head">
+                                                    <div class="kt-portlet__head-label">
+                                                        <h3 class="kt-portlet__head-title">
+                                                            Video
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-portlet__body">
+                                                    <div class="tab-content">
+                                                        <div
+                                                            class="tab-pane active"
+                                                            id="kt_widget1_tab1_content"
+                                                        >
+                                                            <div
+                                                                class="kt-widget2"
+                                                                id="videopage_video"
+                                                            >
+                                                                <video
+                                                                    width="100%"
+                                                                    id="videopage_video"
+                                                                    controls
+                                                                >
+                                                                    <source
+                                                                        id="videopage_video-source"
+                                                                    />
+                                                                    Your browser does not support
+                                                                    the video tag.
+                                                                </video>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--end:: Widgets/Tasks -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--End:: App Content-->
+                            </div>
+
+                            <!--End::App-->
+                        </div>
+
+                        <!-- end:: Content -->
+                    </div>
+
+                    <!-- message image pop up -->
+                    <div class="message-image-modal-outer">
+                        <div class="message-image-modal-inner">
+                            <div class="message-image-modal--buttons">
+                                <a id="message-image-modal--download">Download image</a>
+                                <button
+                                    type="button"
+                                    class="close close-message-image"
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <img
+                                class="message-image-modal--image"
+                                id="message-image-modal--image"
+                                alt="Image"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- begin:: Footer -->
+                    <div
+                        class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop"
+                        id="kt_footer"
+                    >
+                        <div class="kt-container kt-container--fluid">
+                            <div class="kt-footer__copyright">
+                                2019&nbsp;&copy;&nbsp;<a href="" target="_blank" class="kt-link"
+                                    >Nowsnapp Tribe</a
+                                >
+                            </div>
+                            <div class="kt-footer__menu">
+                                <a href="" target="_blank" class="kt-footer__menu-link kt-link"
+                                    >A propos</a
+                                >
+                                <a href="" target="_blank" class="kt-footer__menu-link kt-link"
+                                    >Support</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end:: Footer -->
+                </div>
+            </div>
+        </div>
+
+        <!-- end:: Page -->
+
+        <!-- begin::Scrolltop -->
+        <div id="kt_scrolltop" class="kt-scrolltop">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+
+        <!-- end::Scrolltop -->
+
+        <!-- begin::Global Config(global config for global JS sciprts) -->
+        <script>
+            var KTAppOptions = {
+                colors: {
+                    state: {
+                        brand: "#5d78ff",
+                        dark: "#282a3c",
+                        light: "#ffffff",
+                        primary: "#ff2727",
+                        success: "#34bfa3",
+                        info: "#36a3f7",
+                        warning: "#ffb822",
+                        danger: "#fd3995",
+                    },
+                    base: {
+                        label: ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                        shape: ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"],
+                    },
+                },
+            };
+        </script>
+
+        <!-- end::Global Config -->
+
+        <!-- begin::Environment Config -->
+        <script src="config/config.js" type="text/javascript"></script>
+        <!-- end::Environment Config -->
+
+        <!--begin::Global Theme Bundle(used by all pages) -->
+        <script src="assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+        <script src="assets/js/scripts.bundle.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <!--end::Global Theme Bundle -->
+
+        <!--begin::Page Scripts(used by this page) -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="assets/js/pages/dashboard.js" type="text/javascript"></script>
+        <script src="assets/js/pages/global-functions.js" type="text/javascript"></script>
+        <script src="assets/js/pages/custom/video/video.js" type="text/javascript"></script>
+
+        <!--end::Page Scripts -->
+        <script>
+            $(document).ready(function () {
+                initTokenSecurity();
+            });
+        </script>
+    </body>
+
+    <!-- end::Body -->
+</html>

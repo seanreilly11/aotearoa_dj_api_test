@@ -1,0 +1,57 @@
+//
+// Aside Brand
+//
+
+
+
+.kt-aside__brand {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	padding: 0 kt-get($kt-page-padding, desktop);
+	height: kt-get($kt-header-config, base, desktop, default, height);
+
+	.kt-aside__brand-logo {
+		display: flex;
+		justify-content: flex-begin;
+
+		img {
+			.kt-aside--minimize & {
+				display: none;
+			}
+		}
+	}
+}
+
+@include kt-desktop {
+	.kt-aside__brand {
+		transition: kt-get($kt-aside-config, base, minimize, transition);
+
+		// Header fixed & aside static mode
+		.kt-header--fixed.kt-aside--static & {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: kt-get($kt-aside-config, base, default, width);
+			z-index: kt-get($kt-header-config, base, desktop, fixed, zindex);
+		}
+
+		// Aside minimize mode
+		.kt-header--fixed.kt-aside--minimize & {
+			justify-content: center;
+		}
+
+		// Aside minimize, header fixed & aside static mode
+		.kt-header--fixed.kt-aside--static.kt-aside--minimize & {
+			transition: kt-get($kt-aside-config, base, minimize, transition);
+			width: kt-get($kt-aside-config, base, minimize, width);
+		}
+	}
+}
+
+@include kt-tablet-and-mobile {
+	.kt-aside__brand {
+		display: none;
+	}
+}

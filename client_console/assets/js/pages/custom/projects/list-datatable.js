@@ -48,29 +48,6 @@ var KTUserListDatatable = (function () {
                 },
             },
 
-            translate: {
-                records: {
-                    noRecords: "No records",
-                    processing: "Loading...",
-                },
-                toolbar: {
-                    pagination: {
-                        items: {
-                            info: "Showing courses {{start}} - {{end}} of {{total}}",
-                            default: {
-                                first: "First",
-                                prev: "Previous",
-                                next: "Next",
-                                last: "Last",
-                                more: "More",
-                                input: "Page number",
-                                select: "Number of records",
-                            },
-                        },
-                    },
-                },
-            },
-
             // columns definition
             columns: [
                 {

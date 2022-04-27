@@ -48,29 +48,6 @@ var KTUserListDatatable = (function () {
                 },
             },
 
-            translate: {
-                records: {
-                    noRecords: "Pas d'entrées",
-                    processing: "Chargement en cours...",
-                },
-                toolbar: {
-                    pagination: {
-                        items: {
-                            info: "Affichage des pages {{start}} - {{end}} sur {{total}}",
-                            default: {
-                                first: "Première",
-                                prev: "Précédent",
-                                next: "Prochaine",
-                                last: "Dernière",
-                                more: "Plus de pages",
-                                input: "Page number",
-                                select: "Nombre d'entrées",
-                            },
-                        },
-                    },
-                },
-            },
-
             // columns definition
             columns: [
                 {
@@ -81,15 +58,17 @@ var KTUserListDatatable = (function () {
                     template: function (data) {
                         return `<div class="kt-user-card-v2">
                             <div class="kt-user-card-v2__details">
-                                <a href="custom/user/overview.html?userId=${
-                                    data._id
-                                }" class="kt-user-card-v2__name">${
-                            data.firstname || data.name
-                        }</a>
+                                <span class="kt-user-card-v2__name">${
+                                    data.name || data.firstname + " " + data.lastname
+                                }</span>
                             </div>
                         </div>`;
                     },
                 },
+                // TODO: remove data.name option above
+                // <a href="custom/user/overview.html?userId=${
+                //     data._id
+                // }" class="kt-user-card-v2__name">${data.firstname + " " + data.lastname}</a>
                 {
                     field: "email",
                     title: "Email",
@@ -107,7 +86,6 @@ var KTUserListDatatable = (function () {
                     width: "auto",
                     sortable: false,
                     template: function (data) {
-                        // TODO: show number of orders
                         return `${data.videosCompleted.length}`;
                     },
                 },
@@ -120,20 +98,20 @@ var KTUserListDatatable = (function () {
                         return `${data.coursesCompleted.length}`;
                     },
                 },
-                // {
-                //     field: "lastLogin",
-                //     title: "Dernière connexion",
-                //     width: "auto",
-                //     sortable: false,
-                //     template: function (data) {
-                //         var date = new Date(data.updatedDate);
-                //         var month = date.getMonth() + 1;
-                //         var dt = date.getDate();
-                //         if (dt < 10) dt = "0" + dt;
-                //         if (month < 10) month = "0" + month;
-                //         return dt + "/" + month + "/" + date.getFullYear();
-                //     },
-                // },
+                {
+                    field: "lastLogin",
+                    title: "Last login",
+                    width: "auto",
+                    sortable: false,
+                    template: function (data) {
+                        var date = new Date(data.updatedDate);
+                        var month = date.getMonth() + 1;
+                        var dt = date.getDate();
+                        if (dt < 10) dt = "0" + dt;
+                        if (month < 10) month = "0" + month;
+                        return dt + "/" + month + "/" + date.getFullYear();
+                    },
+                },
             ],
         });
     };

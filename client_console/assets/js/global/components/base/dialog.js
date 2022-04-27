@@ -15,7 +15,7 @@ var KTDialog = function (options) {
         type: "loader",
         width: 100,
         state: "default",
-        message: "Chargement...",
+        message: "Loading...",
     };
 
     ////////////////////////////

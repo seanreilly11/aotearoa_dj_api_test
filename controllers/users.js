@@ -18,11 +18,10 @@ exports.getUserByID = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
 
-        if (!user) {
+        if (!user)
             return res.status(404).json({
                 error: "No user found",
             });
-        }
 
         return res.status(200).json(user);
     } catch (err) {
@@ -80,6 +79,7 @@ exports.loginAdminUser = async (req, res, next) => {
         if (user) {
             if (bcryptjs.compareSync(req.body.password, user.password)) {
                 if (user.admin) {
+                    const securityKey = generateSecurityKey(true);
                     const updateUser = await User.updateOne(
                         {
                             _id: user._id,
@@ -88,14 +88,13 @@ exports.loginAdminUser = async (req, res, next) => {
                             $currentDate: {
                                 updatedDate: true,
                             },
-                            $set: { securityKey: generateSecurityKey(true) },
+                            $set: { securityKey },
                         }
                     );
-                    const userWithToken = await User.findById(user._id);
                     return res.status(200).json({
-                        uid: userWithToken._id,
-                        token: userWithToken.securityKey,
-                        firstname: userWithToken.firstname,
+                        uid: user._id,
+                        token: securityKey,
+                        firstname: user.firstname,
                     });
                 } else
                     return res.status(403).json({

@@ -24,7 +24,7 @@ var KTDashboard = (function () {
             var loading = new KTDialog({
                 type: "loader",
                 placement: "top center",
-                message: "Chargement...",
+                message: "Loading...",
             });
             loading.show();
 

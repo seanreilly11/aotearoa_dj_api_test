@@ -1,6 +1,6 @@
 var gbIpClient;
 var redirectURL = "https://www.aotearoadjacadmey.com";
-const validLoginURL = "map.html";
+const validLoginURL = "courses.html";
 
 var urlParam = function (name) {
     var results = new RegExp("[?&]" + name + "=([^&#]*)").exec(window.location.href);
@@ -28,7 +28,7 @@ function initTokenSecurity() {
     $("#userId").text(userPassport.firstname);
     $("#userLetter").text(userPassport.firstname.charAt(0).toUpperCase());
     $("#userLetter1").text(userPassport.firstname.charAt(0).toUpperCase());
-    $("#userFullId").text(userPassport.firstname);
+    $("#userFullId").text(userPassport.firstname + " " + (userPassport.lastname || ""));
 
     //Initiate Security : Menu
     $("a[href]:not(.no-token").each(function () {

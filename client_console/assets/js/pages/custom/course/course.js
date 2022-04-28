@@ -35,8 +35,9 @@ $(document).ready(function () {
     }); //ajax
 
     function printVideos(data) {
-        for (let i = 0; i < data.length; i++) {
-            var output = `<li class="kt-widget2__item kt-widget2__item--primary">
+        if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+                var output = `<li class="kt-widget2__item kt-widget2__item--primary">
                             <div class="kt-widget2__info ml-5">
                                 <a href="custom/video/overview.html?videoId=${
                                     data[i]._id
@@ -53,6 +54,14 @@ $(document).ready(function () {
                             }">${status[data[i].status].title}</span>
                             </div>
                         </li>`;
+                $("#coursepage_videos").append(output);
+            }
+        } else {
+            let output = `<div class="d-flex justify-content-center align-items-center flex-column">
+                            <img src="asset/images/empty-folder.png" width="150" />
+                            <h5>Looks like you've got no videos in this course</h5>
+                            <p>Add a new video to the course to see it here</p>
+                        </div>`;
             $("#coursepage_videos").append(output);
         }
 

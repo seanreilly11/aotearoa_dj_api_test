@@ -64,7 +64,7 @@ function getIconBgColor(status) {
 
 const status = {
     0: {
-        title: "Nouveau",
+        title: "Unknown",
         class: "btn-status-new",
     },
     1: {
@@ -83,7 +83,7 @@ const status = {
 
 const difficulty = {
     0: {
-        title: "Nouveau",
+        title: "Unknown",
         class: "btn-status-new",
     },
     1: {

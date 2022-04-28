@@ -87,10 +87,10 @@ var KTUserListDatatable = (function () {
                     template: function (data) {
                         const status = {
                             DJ: {
-                                class: "btn-label-warning",
+                                class: "btn-label-info",
                             },
                             Production: {
-                                class: "btn-label-info",
+                                class: "btn-label-warning",
                             },
                         };
 

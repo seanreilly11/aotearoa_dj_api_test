@@ -17,7 +17,6 @@ $(document).ready(function () {
             console.log(data);
             document.title += " | " + data.title;
             $("#videopage_title").text(data.title);
-            $("#videopage_category").text(data.category);
             $("#videopage_views").text(data.views);
             $("#videopage_difficulty").text(difficulty[data.difficulty].title);
             $("#videopage_status").text(status[data.status].title);
@@ -30,19 +29,12 @@ $(document).ready(function () {
             courseId = data.courseId;
 
             var video = document.getElementById("videopage_video");
-            var videoSource = document.getElementById("videopage_video-source");
+            var source = document.createElement("source");
 
-            videoSource.setAttribute("src", data.videoURI || backupVideo);
-            videoSource.setAttribute("type", "video/mp4");
+            source.src = data.videoURI || backupVideo;
+            source.type = "video/mp4";
 
-            // setTimeout(() => video.load(), 3000);
-
-            // $("#videopage_video-source").attr(
-            //     "src",
-            //     "https://cdn.videvo.net/videvo_files/video/premium/video0233/large_watermarked/03_oduvan_agro_hand_37_hands_preview.mp4"
-            // );
-            // $("#videopage_video-source").attr("type", "video/mp4");
-            // $("#videopage_video")[0].play();
+            video.prepend(source);
 
             initTokenSecurity();
         }, //success

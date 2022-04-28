@@ -13,7 +13,7 @@ $(document).ready(function () {
         const description = $("#add-video__desc").val();
         const difficulty = $("[name=add-video__difficulty]:checked").val();
         const videoURI = $("#add-video__videoLink").val();
-        console.log(difficulty);
+
         const body = {
             title,
             description,
@@ -23,33 +23,41 @@ $(document).ready(function () {
             creatorId: userId,
         };
 
-        // $.ajax({
-        //     url: `${environment}/videos`,
-        //     headers: {
-        //         Accept: "/*/",
-        //         "Content-Type": "application/json",
-        //     },
-        //     type: "POST",
-        //     dataType: "json",
-        //     data: JSON.stringify(body),
-        //     success: function (data) {
-        //         Swal.fire({
-        //             title: "Video created successfully",
-        //             text: "You will now be redirected to the video page",
-        //             icon: "success",
-        //             confirmButtonColor: "#3085d6",
-        //             confirmButtonText: "Okay",
-        //             timer: 2500,
-        //         }).then(() =>
-        //             window.location.replace(
-        //                 `custom/video/overview.html?videoId=${data._id}&token=` + token
-        //             )
-        //         );
-        //     }, //success
-        //     error: function () {
-        //         console.log("error: cannot call api");
-        //     }, //error
-        // }); //ajax
+        $.ajax({
+            url: `${environment}/videos`,
+            headers: {
+                Accept: "/*/",
+                "Content-Type": "application/json",
+            },
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify(body),
+            success: function (data) {
+                Swal.fire({
+                    title: "Video created successfully",
+                    text: "You will now be redirected to the video page",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Okay",
+                    timer: 2500,
+                }).then(() =>
+                    window.location.replace(
+                        `custom/video/overview.html?videoId=${data._id}&token=` + token
+                    )
+                );
+            }, //success
+            error: function () {
+                console.log("error: cannot call api");
+                Swal.fire({
+                    title: "Sorry an error occurred",
+                    text: "Please try again later",
+                    icon: "danger",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Okay",
+                    timer: 2500,
+                }).then(() => window.location.replace(`courses.html?token=` + token));
+            }, //error
+        }); //ajax
     });
 
     const showLoader = () => $("#loader").css("display", "flex");

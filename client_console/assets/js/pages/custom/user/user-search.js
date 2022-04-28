@@ -59,13 +59,12 @@ var KTUserListDatatable = (function () {
                         return `<div class="kt-user-card-v2">
                             <div class="kt-user-card-v2__details">
                                 <span class="kt-user-card-v2__name">${
-                                    data.name || data.firstname + " " + data.lastname
+                                    data.firstname + " " + data.lastname
                                 }</span>
                             </div>
                         </div>`;
                     },
                 },
-                // TODO: remove data.name option above
                 // <a href="custom/user/overview.html?userId=${
                 //     data._id
                 // }" class="kt-user-card-v2__name">${data.firstname + " " + data.lastname}</a>

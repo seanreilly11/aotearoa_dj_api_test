@@ -3,9 +3,9 @@ const cors = require("cors");
 const compression = require("compression");
 const helmet = require("helmet");
 const connectDB = require("./config/db");
-const upload = require("./middlewares/multer");
-const Video = require("./models/Video");
-const Course = require("./models/Course");
+// const upload = require("./middlewares/multer");
+// const Video = require("./models/Video");
+// const Course = require("./models/Course");
 
 connectDB();
 
@@ -15,13 +15,13 @@ app.use(express.static("client_console"));
 app.use(compression());
 app.use(helmet());
 app.use(express.json());
-app.use(
-    express.urlencoded({
-        limit: "50mb",
-        extended: true,
-        parameterLimit: 100000,
-    })
-);
+// app.use(
+//     express.urlencoded({
+//         limit: "50mb",
+//         extended: true,
+//         parameterLimit: 100000,
+//     })
+// );
 app.use(cors());
 
 const videos = require("./routes/videos");
@@ -46,6 +46,10 @@ app.get("/", async (req, res) => {
         return res.status(500).json({ error: err.message });
     }
 });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, console.log(`Server running on ${PORT}`));
 
 // route to add new video is here as I can't link it with the middleware in the routes file
 // @desc Add new video
@@ -80,7 +84,3 @@ app.get("/", async (req, res) => {
 //         }
 //     }
 // });
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, console.log(`Server running on ${PORT}`));
